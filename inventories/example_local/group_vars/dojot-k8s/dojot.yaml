@@ -44,3 +44,10 @@ dojot_nodeports:
   mqtt: 30310
   mqtts: 30311
   metrics: 30033
+  lwm2m:
+    http: 30015
+    https: 30016
+    coap: 30011
+    coaps: 30012
+    file_server: 30013
+    secure_file_server: 30014

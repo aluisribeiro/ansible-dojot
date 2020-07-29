@@ -31,7 +31,7 @@ listen mqtt
         balance leastconn
 
 {% for node in haproxy_mqtt_nodes | default([]) %}
-        server mqtt-{{ loop.index }} {{ node }}:{{ haproxy_mqtt_port }} check inter 1000ms fall 3 rise 5
+        server mqtt-{{ loop.index }} {{ node }}:{{ dojot_nodeports.mqtt }} check inter 1000ms fall 3 rise 5
 {% endfor %}
 
 listen mqtts
@@ -41,7 +41,7 @@ listen mqtts
         balance leastconn
 
 {% for node in haproxy_mqtt_nodes | default([]) %}
-        server mqtt-{{ loop.index }} {{ node }}:{{ haproxy_mqtts_port }} check inter 1000ms fall 3 rise 5
+        server mqtts-{{ loop.index }} {{ node }}:{{ dojot_nodeports.mqtts }} check inter 1000ms fall 3 rise 5
 {% endfor %}
 
 listen kong
@@ -51,7 +51,7 @@ listen kong
         balance leastconn
         
 {% for node in haproxy_kong_nodes | default([]) %}
-        server dojot-{{ loop.index }} {{ node }}:{{ haproxy_kong_port }} check inter 1000ms fall 3 rise 5
+        server dojot-{{ loop.index }} {{ node }}:{{ dojot_nodeports.apigw }} check inter 1000ms fall 3 rise 5
 {% endfor %} 
 
 listen metrics
@@ -61,5 +61,65 @@ listen metrics
         balance leastconn
         
 {% for node in haproxy_metrics_nodes | default([]) %}
-        server metrics-{{ loop.index }} {{ node }}:{{ haproxy_metrics_port }} check inter 1000ms fall 3 rise 5
+        server metrics-{{ loop.index }} {{ node }}:{{ dojot_nodeports.metrics }} check inter 1000ms fall 3 rise 5
+{% endfor %} 
+
+listen lwm2m_http
+        mode tcp
+        option tcplog
+        bind *:5896
+        balance leastconn
+        
+{% for node in haproxy_lwm2m_nodes | default([]) %}
+        server lwm2m-{{ loop.index }} {{ node }}:{{ dojot_nodeports.lwm2m.http }} check inter 1000ms fall 3 rise 5
+{% endfor %} 
+
+listen lwm2m_https
+        mode tcp
+        option tcplog
+        bind *:5897
+        balance leastconn
+        
+{% for node in haproxy_lwm2m_nodes | default([]) %}
+        server lwm2m-{{ loop.index }} {{ node }}:{{ dojot_nodeports.lwm2m.https }} check inter 1000ms fall 3 rise 5
+{% endfor %} 
+
+listen lwm2m_coap
+        mode tcp
+        option tcplog
+        bind *:5683
+        balance leastconn
+        
+{% for node in haproxy_lwm2m_nodes | default([]) %}
+        server lwm2m-{{ loop.index }} {{ node }}:{{ dojot_nodeports.lwm2m.coap }} check inter 1000ms fall 3 rise 5
+{% endfor %} 
+
+listen lwm2m_coaps
+        mode tcp
+        option tcplog
+        bind *:5684
+        balance leastconn
+        
+{% for node in haproxy_lwm2m_nodes | default([]) %}
+        server lwm2m-{{ loop.index }} {{ node }}:{{ dojot_nodeports.lwm2m.coaps }} check inter 1000ms fall 3 rise 5
+{% endfor %} 
+
+listen lwm2m_file_server
+        mode tcp
+        option tcplog
+        bind *:5693
+        balance leastconn
+        
+{% for node in haproxy_lwm2m_nodes | default([]) %}
+        server lwm2m-{{ loop.index }} {{ node }}:{{ dojot_nodeports.lwm2m.file_server }} check inter 1000ms fall 3 rise 5
+{% endfor %} 
+
+listen lwm2m_secure_file_server
+        mode tcp
+        option tcplog
+        bind *:5694
+        balance leastconn
+        
+{% for node in haproxy_lwm2m_nodes | default([]) %}
+        server lwm2m-{{ loop.index }} {{ node }}:{{ dojot_nodeports.lwm2m.secure_file_server }} check inter 1000ms fall 3 rise 5
 {% endfor %} 
