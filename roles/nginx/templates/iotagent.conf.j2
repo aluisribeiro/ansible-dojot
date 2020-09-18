@@ -1,0 +1,11 @@
+upstream iotagent_backend {
+    least_conn;
+{% for node in groups['iotagent_nodes'] | default([]) %}
+    server {{ node }}:{{ dojot_nodeports.iotagent.http }};
+{% endfor %}
+}
+
+server {
+	listen 8080;
+	proxy_pass iotagent_backend;
+}
