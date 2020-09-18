@@ -1,0 +1,6 @@
+---
+# Define the default value for the variables of the iot agent http service
+
+dojot_iotagent_http_version: logs
+
+dojot_iotagent_http_server_port: 3124

@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: iotagent-http
+    app: dojot
+  name: iotagent-http
+  namespace: {{ dojot_namespace }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: iotagent-http
+        app: dojot
+    spec:
+      containers:
+      - image: mprevide/iotagenthttp:{{ dojot_iotagent_http_version }}
+        name: iotagent-http
+        env:
+        - name: SERVER_PORT
+          value: "{{ dojot_iotagent_http_server_port }}"
+        - name: DOJOT_SERVICE_MANAGEMENT
+          value: "internal"
+        - name: DOJOT_MANAGEMENT_USER
+          value: iotagent-http
+        - name: KAFKA_GROUP_ID
+          value: iotagent-http-group
+        - name: KAFKA_HOSTS
+          value: kafka-server:{{ dojot_kafka_port }}
+      restartPolicy: Always
