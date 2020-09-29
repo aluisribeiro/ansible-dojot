@@ -161,4 +161,8 @@ spec:
       resources:
         requests:
           storage: {{ dojot_kafka_volume_size }}
+      selector:
+        matchLabels:
+          app: dojot
+          name: kafka-server     
 {% endif %} 

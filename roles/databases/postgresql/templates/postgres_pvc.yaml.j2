@@ -10,3 +10,7 @@ spec:
     requests:
       storage: {{ dojot_psql_volume_size }}
   storageClassName: {{ dojot_storage_class_name }}
+  selector:
+    matchLabels:
+      app: dojot
+      db: postgres
