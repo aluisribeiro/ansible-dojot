@@ -1,0 +1,11 @@
+upstream monitoring_backend {
+    least_conn;
+{% for node in groups['monitoring_nodes'] | default([]) %}
+    server {{ node }}:{{ dojot_nodeports.monitoring.http }};
+{% endfor %}
+}
+
+server {
+	listen 8081;
+	proxy_pass monitoring_backend;
+}
