@@ -14,6 +14,15 @@ spec:
         name: kong
         app: dojot
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dojot.components/group
+                operator: In
+                values:
+                - "core"
       containers:
       - name: kong
         image: dojot/kong:{{ dojot_apigw_version }}

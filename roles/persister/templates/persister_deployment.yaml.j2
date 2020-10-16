@@ -14,6 +14,15 @@ spec:
         name: persister
         app: dojot
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dojot.components/group
+                operator: In
+                values:
+                - "core"
       containers:
       - image: dojot/persister:{{ dojot_persister_version }}
         name: persister

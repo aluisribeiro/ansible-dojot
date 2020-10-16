@@ -15,6 +15,15 @@ spec:
       labels:
         app: grafana
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dojot.components/group
+                operator: In
+                values:
+                - "core"
       containers:
       - image: grafana/grafana:6.0.1
         name: grafana

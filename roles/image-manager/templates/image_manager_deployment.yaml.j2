@@ -14,6 +14,15 @@ spec:
         name: image-manager
         app: dojot
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dojot.components/group
+                operator: In
+                values:
+                - "core"
       containers:
       - image: dojot/image-manager:{{ dojot_image_manager_version }}
         name: image-manager

@@ -14,6 +14,15 @@ spec:
         name: rabbitmq
         app: dojot
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dojot.components/group
+                operator: In
+                values:
+                - "core"
       containers:
       - image: dojot/rabbitmq:{{ dojot_rabbitmq_version }}
         name: rabbitmq

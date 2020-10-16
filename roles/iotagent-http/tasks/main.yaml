@@ -1,6 +1,6 @@
 ## This role is responsible for deploying the IoT Agent Mosca Service for dojot
 
-- name: dojot - IoT Agent Mosca Objects
+- name: dojot - IoT Agent HTTP Objects
   k8s:
     kubeconfig: "{{ dojot_kubeconfig_file_path | default(omit) }}"
     state: present

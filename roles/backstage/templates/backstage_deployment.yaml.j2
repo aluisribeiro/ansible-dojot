@@ -14,6 +14,15 @@ spec:
         name: backstage
         app: dojot
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dojot.components/group
+                operator: In
+                values:
+                - "core"
       containers:
       - image: dojot/backstage:{{ dojot_version }}
         name: backstage

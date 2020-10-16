@@ -14,6 +14,15 @@ spec:
         name: ejbca
         app: dojot
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dojot.components/group
+                operator: In
+                values:
+                - "core"
       restartPolicy: Always
       containers:
       - image: dojot/ejbca-rest:{{ dojot_ejbca_version }}

@@ -55,6 +55,7 @@
     - apigw
     - apigw_secure
     - iotagent
+    - monitoring
 
 - name: restart nginx
   become: yes

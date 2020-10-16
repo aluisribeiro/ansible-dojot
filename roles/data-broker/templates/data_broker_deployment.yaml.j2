@@ -14,6 +14,15 @@ spec:
         name: data-broker
         app: dojot
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dojot.components/group
+                operator: In
+                values:
+                - "core"
       containers:
       - image: dojot/data-broker:{{ dojot_data_broker_version }}
         name: data-broker

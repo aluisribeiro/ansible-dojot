@@ -14,6 +14,15 @@ spec:
         name: data-manager
         app: dojot
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dojot.components/group
+                operator: In
+                values:
+                - "core"
       containers:
       - image: dojot/data-manager:{{ dojot_data_manager_version }}
         name: data-manager
