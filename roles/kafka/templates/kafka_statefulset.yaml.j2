@@ -148,7 +148,7 @@ spec:
 {% if dojot_kafka_persistent_volumes %}
         volumeMounts:
         - name: kafka-volume
-          mountPath: /var/lib/kafka
+          mountPath: /tmp/kafka-logs
 {% endif %} 
         readinessProbe:
           exec:
