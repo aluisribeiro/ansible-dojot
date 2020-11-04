@@ -132,8 +132,8 @@ data:
         # rate plugin limit to avoid brute-force atacks
         curl -o /dev/null -sS -X POST ${kong}/apis/auth-service/plugins \
             --data "name=rate-limiting" \
-            --data "config.minute=5" \
-            --data "config.hour=40" \
+            --data "config.minute=100" \
+            --data "config.hour=6000" \
             --data "config.policy=local"
 
 
